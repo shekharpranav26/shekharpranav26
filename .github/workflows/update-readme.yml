@@ -6,18 +6,16 @@ on:
   workflow_dispatch:
 
 jobs:
-  update-readme:
+  refresh-stats:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-
-      - name: Trigger GitHub Readme Stats Cache Refresh
+      - name: Trigger GitHub Stats Cache Refresh
         run: |
-          curl -s "https://github-readme-stats.vercel.app/api?username=shekharpranav26&show_icons=true&theme=merko&cache_seconds=1800" > /dev/null
-          curl -s "https://github-readme-stats.vercel.app/api/top-langs/?username=shekharpranav26&layout=compact&theme=merko&cache_seconds=1800" > /dev/null
-          curl -s "https://github-readme-streak-stats.herokuapp.com/?user=shekharpranav26&theme=merko" > /dev/null
-          curl -s "https://github-readme-activity-graph.vercel.app/graph?username=shekharpranav26&theme=merko&bg_color=0D1117&color=58D68D&line=2ECC71&point=1ABC9C" > /dev/null
+          echo "Pinging GitHub Stats services..."
+          curl -sSf "https://github-readme-stats.vercel.app/api?username=shekharpranav26&show_icons=true&theme=merko&cache_seconds=1800" > /dev/null
+          curl -sSf "https://github-readme-stats.vercel.app/api/top-langs/?username=shekharpranav26&layout=compact&theme=merko&cache_seconds=1800" > /dev/null
+          curl -sSf "https://github-readme-streak-stats.herokuapp.com/?user=shekharpranav26&theme=merko" > /dev/null
+          curl -sSf "https://github-readme-activity-graph.vercel.app/graph?username=shekharpranav26&theme=merko&bg_color=0D1117&color=58D68D&line=2ECC71&point=1ABC9C" > /dev/null
 
-      - name: Keep Workflow Active
+      - name: Keep Workflow Alive
         uses: gautamkrishnar/keepalive-workflow@v1
